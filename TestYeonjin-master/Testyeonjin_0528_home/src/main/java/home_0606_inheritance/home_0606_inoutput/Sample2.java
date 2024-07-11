@@ -1,0 +1,23 @@
+package home_0606_inheritance.home_0606_inoutput;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+public class Sample2 {
+
+    public static void main(String[] args) throws IOException {
+        InputStream in = System.in;
+        InputStreamReader reader = new InputStreamReader(in);
+        char[] a = new char[3];
+        reader.read(a);
+
+        System.out.println(a);
+//        System.out.println(a[0]);
+//        System.out.println(a[1]);
+//        System.out.println(a[2]);
+
+
+    }
+
+}

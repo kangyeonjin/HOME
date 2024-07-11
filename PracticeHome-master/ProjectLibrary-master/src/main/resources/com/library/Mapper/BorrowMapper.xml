@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.Mapper.BorrowMapper">
+
+    <resultMap id="borrow1" type="com.library.dto.BorrowDTO">
+        <id property="borrowCode" column="borrowcode"/>
+        <result property="borrowDay" column="borrowday"/>
+        <result property="returnDay" column="returnday"/>
+        <result property="bookCode" column="bookcode"/>
+        <result property="memberCode" column="membercode"/>
+    </resultMap>
+
+    <select id="selectAllBorrow" resultMap="borrow1">
+        select *
+        from borrowmanagement
+
+    </select>
+
+    <insert id="insertBorrow" parameterType="com.library.dto.BorrowDTO">
+        insert into borrowmanagement
+        ( borrowcode, borrowday, returnday,bookcode,membercode)
+        values
+        ( #{ borrowCode } , #{ borrowDay } , #{ returnDay } , #{ bookCode }, #{ memberCode } )
+    </insert>
+
+    <delete id="deleteBorrow" parameterType="com.library.dto.BorrowDTO">
+        delete
+        from
+        borrowmanagement
+        where
+        borrowcode = #{ borrowCode }
+    </delete>
+
+    <update id="modifyBorrow">
+        update borrowmanagement
+        set
+
+        borrowday = #{ borrowDay },
+        returnday = #{ returnDay }
+
+        where
+        borrowcode = #{ borrowCode }
+
+    </update>
+
+    <select id="selectBorrowByCode" parameterType="String" resultMap="borrow1">
+
+        select *
+        from borrowmanagement
+        where borrowcode = #{ borrowCode }
+
+    </select>
+
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.Mapper.MemberMapper">
+
+    <resultMap id="member1" type="com.library.dto.MemberDTO">
+        <id property="membercode" column="membercode"/>
+        <result property="membername" column="membername"/>
+        <result property="memberphone" column="memberphone"/>
+        <result property="memberno" column="memberno"/>
+    </resultMap>
+
+    <select id="memberTest" resultMap="member1">
+        select
+        *
+        from
+        membermanagement
+
+    </select>
+
+    <insert id="memberInsert" parameterType="com.library.dto.MemberDTO">
+
+        <!--        insert into 회원관리(회원코드, 회원이름, 회원전화번호, 회원주민번호)-->
+        <!--        value(7, '김강현', '01078455623','100102-1587988');-->
+
+        insert into memberManagement(
+        memberCode,
+        memberName,
+        memberPhone,
+        memberNo
+        ) values (
+        #{ membercode },
+        #{ membername },
+        #{ memberphone },
+        #{ memberno }
+        )
+    </insert>
+
+
+    <update id="memberUpdate" parameterType="com.library.dto.MemberDTO">
+
+        update membermanagement set
+        membercode = #{ membercode },
+        memberphone = #{ memberphone },
+        memberno = #{ memberno }
+        where membername = #{ membername }
+
+    </update>
+
+    <delete id="memberDelete" parameterType = "String">
+
+        delete
+        from
+        membermanagement
+        where
+        membercode = #{membercode}
+
+    </delete>
+
+<!--    입력한 이름으로 검색하기   -->
+
+    <select id="searchMember" parameterType="SearchMember" resultMap="member1">
+
+    select
+    membercode,
+    memberphone,
+    memberno
+
+    from membermanagement
+
+        <if test ="condition == 'name'">
+    where membername = #{ membername }
+    </if>
+
+    </select>
+
+
+<!--    코드를 입력하면 대출날짜가 나옴(대출테이블과 join) -->
+
+
+</mapper>
