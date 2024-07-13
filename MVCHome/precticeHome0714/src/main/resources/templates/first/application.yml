@@ -1,0 +1,5 @@
+spring:
+  pplication:
+   name: precticeHome0714
+server:
+  port: 8080
